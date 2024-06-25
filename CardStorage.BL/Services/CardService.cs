@@ -1,9 +1,11 @@
-﻿using CardStorage.Common.Request;
+﻿using CardStorage.BL.Helpers;
+using CardStorage.Common.Request;
 using CardStorage.Common.Response;
 using CardStorage.Domain.Enum;
-using Common.Helpers;
+using Data.Repositories;
 using Domain.Entities;
 using Domain.Enum;
+using Domain.Exceptions;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using System;
@@ -23,10 +25,11 @@ namespace BL.Services
 
         public GetCardResponse GetCard(int cardId, int cardDeckId)
         {
+
             var cardDeck = _cardDeckRepository.GetCardDeck(cardDeckId);
             if (cardDeck == null)
             {
-                throw new ArgumentException("Колода не найдена. Пожалуйста проверьте правильность введеных данных и повторите попытку");
+                throw new BadRequestException("Колода не найдена. Пожалуйста проверьте правильность введеных данных и повторите попытку");
             }
 
             var card = _cardRepository.GetCard(cardDeck, cardId);
@@ -42,6 +45,8 @@ namespace BL.Services
 
         public void AddCard(AddCardRequest card)
         {
+            ValidationHelper.ValidateCard(card.Suit, card.Value, card.CardDeckId, _cardDeckRepository);
+
             var random = new Random();
             var cardDeck = _cardDeckRepository.GetCardDeck(card.CardDeckId);
             _cardRepository.AddCard(cardDeck,new Card
@@ -57,9 +62,10 @@ namespace BL.Services
 
         public void UpdateCard(UpdateCardRequest card)
         {
+            ValidationHelper.ValidateCard(card.Suit, card.Value, card.CardDeckId, _cardDeckRepository);
+
             var cardDeck = _cardDeckRepository.GetCardDeck(card.CardDeckId);
-            if (cardDeck != null)
-            {
+
                 _cardRepository.UpdateCard(cardDeck, new Card
                 {
                     Id = card.Id,
@@ -67,29 +73,32 @@ namespace BL.Services
                     Value = (CardValue)card.Value,
                 });
                 _cardDeckRepository.UpdateCardDeck(cardDeck);
-            }
-            else
-            {
-                throw new ArgumentException("Такой колоды не существует");
-            }
         }
 
         public void DeleteCard(int cardId, int cardDeckId)
         {
+            if (!ValidationHelper.IsValidCardDeckId(cardDeckId, _cardDeckRepository))
+            {
+                throw new BadRequestException("Неверный ID колоды. Пожалуйста, проверьте правильность введенных данных и повторите попытку.");
+            }
+            if (!ValidationHelper.IsValidCardId(cardId, cardDeckId, _cardRepository, _cardDeckRepository))
+            {
+                throw new BadRequestException("Неверный ID карты. Пожалуйста, проверьте правильность введенных данных и повторите попытку.");
+            }
+
             var cardDeck = _cardDeckRepository.GetCardDeck(cardDeckId);
-            if (cardDeck != null)
-            {
-                _cardRepository.DeleteCard(cardDeck, cardId);
-                _cardDeckRepository.UpdateCardDeck(cardDeck);
-            }
-            else
-            {
-                throw new ArgumentException("Такой колоды не существует");
-            }
+            _cardRepository.DeleteCard(cardDeck, cardId);
+            _cardDeckRepository.UpdateCardDeck(cardDeck);
+            
         }
 
         public GetAllCardsInDeckResponse GetAllCardsInDeck(int cardDeckId)
         {
+            if (!ValidationHelper.IsValidCardDeckId(cardDeckId, _cardDeckRepository))
+            {
+                throw new BadRequestException("Неверный ID колоды. Пожалуйста, проверьте правильность введенных данных и повторите попытку.");
+            }
+
             var cardDeck = _cardDeckRepository.GetCardDeck(cardDeckId);
             var cardResponses = new List<GetCardResponse>();
             if (cardDeck != null)

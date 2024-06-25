@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CardStorage.API</name>
+    </assembly>
+    <members>
+        <member name="M:CardStorage.API.Controllers.CardController.GetCard(System.Int32,System.Int32)">
+            <summary>
+            Получает информацию о карте.
+            </summary>
+        </member>
+        <member name="M:CardStorage.API.Controllers.CardController.GetAllCardsInDeck(System.Int32)">
+            <summary>
+            Получает список всех карт в указанной колоде/
+            </summary>
+        </member>
+        <member name="M:CardStorage.API.Controllers.CardController.AddCard(System.Collections.Generic.IEnumerable{CardStorage.Common.Request.AddCardRequest})">
+            <summary>
+            Добавляет новые карты в указанную колоду.
+            </summary>
+        </member>
+        <member name="M:CardStorage.API.Controllers.CardController.UpdateCard(CardStorage.Common.Request.UpdateCardRequest)">
+            <summary>
+            Обновить карту.
+            </summary>
+        </member>
+        <member name="M:CardStorage.API.Controllers.CardController.DeleteCard(System.Int32,System.Int32)">
+            <summary>
+            Удаляет карту.
+            </summary>
+        </member>
+        <member name="M:CardStorage.API.Controllers.CardDeckController.GetCardDeck(System.Int32)">
+            <summary>
+            Получает колоду карт.
+            </summary>
+        </member>
+        <member name="M:CardStorage.API.Controllers.CardDeckController.GetAllDecks">
+            <summary>
+            Получает список всех существующих колод карт.
+            </summary>
+        </member>
+        <member name="M:CardStorage.API.Controllers.CardDeckController.CreateCardDeck(CardStorage.Common.Request.CreateCardDeckRequest)">
+            <summary>
+            Создает новую колоду карт.
+            </summary>
+        </member>
+        <member name="M:CardStorage.API.Controllers.CardDeckController.UpdateCardDeck(CardStorage.Common.Request.UpdateCardDeckRequest)">
+            <summary>
+            Обновляет информацию о существующей колоде карт.
+            </summary>
+        </member>
+        <member name="M:CardStorage.API.Controllers.CardDeckController.ShuffleCardDeck(System.Int32)">
+            <summary>
+            Перемешивает карты в указанной колоде карт по идентификатору.
+            </summary>
+        </member>
+        <member name="M:CardStorage.API.Controllers.CardDeckController.DeleteCardDeck(System.Int32)">
+            <summary>
+            Удаляет колоду карт по идентификатору.
+            </summary>
+        </member>
+    </members>
+</doc>

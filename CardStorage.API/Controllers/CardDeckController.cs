@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using CardStorage.Common.Request;
 using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,16 +14,22 @@ namespace CardStorage.API.Controllers
             _cardDeckService = cardDeckService;
         }
 
-        [HttpGet("getCardDeck/{cardId}")]
+        /// <summary>
+        /// Получает колоду карт.
+        /// </summary>
+        [HttpGet("getCardDeck/{cardDeckId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetCardDeck(int cardId)
+        public IActionResult GetCardDeck(int cardDeckId)
         {
-            var deckCard = _cardDeckService.GetCardDeck(cardId);
+            var deckCard = _cardDeckService.GetCardDeck(cardDeckId);
             return Ok(deckCard);
         }
 
-        [HttpGet("allDecks")]
+        /// <summary>
+        /// Получает список всех существующих колод карт.
+        /// </summary>
+        [HttpGet("allCardDecks")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult GetAllDecks()
@@ -32,25 +38,34 @@ namespace CardStorage.API.Controllers
             return Ok(cardDeck);
         }
 
+        /// <summary>
+        /// Создает новую колоду карт.
+        /// </summary>
         [HttpPost("createCardDeck")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult CreateCardDeck([FromBody] CardDeck cardDeck)
+        public IActionResult CreateCardDeck([FromBody] CreateCardDeckRequest cardDeckRequest)
         {
-            _cardDeckService.CreateCardDeck(cardDeck);
+            _cardDeckService.CreateCardDeck(cardDeckRequest);
             return Ok();
         }
 
+        /// <summary>
+        /// Обновляет информацию о существующей колоде карт.
+        /// </summary>
         [HttpPut("updateCardDeck")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult UpdateCardDeck([FromBody] CardDeck cardDeck)
+        public IActionResult UpdateCardDeck([FromBody] UpdateCardDeckRequest cardDeckRequest)
         {
-            _cardDeckService.UpdateCardDeck(cardDeck);
+            _cardDeckService.UpdateCardDeck(cardDeckRequest);
             return Ok();
         }
 
+        /// <summary>
+        /// Перемешивает карты в указанной колоде карт по идентификатору.
+        /// </summary>
         [HttpPut("shuffleCardDeck/{cardDeckId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -60,6 +75,9 @@ namespace CardStorage.API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Удаляет колоду карт по идентификатору.
+        /// </summary>
         [HttpDelete("deleteCardDeck/{cardDeckId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

@@ -48,6 +48,7 @@ namespace Data.Repositories
             {
                 var random = new Random();
                 cardDeck.Cards = cardDeck.Cards.OrderBy(x => random.Next()).ToList();
+
                 UpdateCardDeck(cardDeck);
             }
         }

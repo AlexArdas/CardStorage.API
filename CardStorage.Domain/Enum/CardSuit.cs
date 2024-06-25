@@ -8,7 +8,7 @@ namespace CardStorage.Domain.Enum
 {
     public enum CardSuit
     {
-        Hearts,
+        Hearts = 1,
         Diamonds,
         Clubs,
         Spades

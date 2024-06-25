@@ -1,8 +1,10 @@
-﻿using CardStorage.Common.Request;
+﻿using CardStorage.BL.Helpers;
+using CardStorage.Common.Request;
 using CardStorage.Common.Response;
 using CardStorage.Domain.Enum;
 using Domain.Entities;
 using Domain.Enum;
+using Domain.Exceptions;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 
@@ -18,24 +20,39 @@ namespace BL.Services
         }
         public void CreateCardDeck(CreateCardDeckRequest cardDeckRequest)
         {
+            if (string.IsNullOrEmpty(cardDeckRequest.Name))
+            {
+                throw new BadRequestException("Неверное имя колоды. Пожалуйста, проверьте правильность введенных данных и повторите попытку.");
+            }
+
             var random = new Random();
+
+            ValidationHelper.ValidateCardsInDeck(cardDeckRequest.Cards);
+
             _cardDeckRepository.CreateCardDeck(new CardDeck
             {
-                Id = random.Next(int.MaxValue),
                 Name = cardDeckRequest.Name,
                 Cards = cardDeckRequest.Cards.Select(c => new Card
                 {
                     Id = random.Next(int.MaxValue),
                     CardDeckId = c.CardDeckId,
                     Order = c.Order,
-                    Suit = (CardSuit) c.Suit,
-                    Value = (CardValue) c.Value,
+                    Suit = (CardSuit)c.Suit,
+                    Value = (CardValue)c.Value,
                 }).ToList()
             });
         }
 
         public void UpdateCardDeck(UpdateCardDeckRequest cardDeckRequest)
         {
+            if (!ValidationHelper.IsValidCardDeckId(cardDeckRequest.Id, _cardDeckRepository))
+            {
+                throw new BadRequestException("Неверный ID колоды. Пожалуйста, проверьте правильность введенных данных и повторите попытку.");
+            }
+            if (string.IsNullOrEmpty(cardDeckRequest.Name))
+            {
+                throw new BadRequestException("Неверное имя колоды. Пожалуйста, проверьте правильность введенных данных и повторите попытку.");
+            }
             _cardDeckRepository.UpdateCardDeck(new CardDeck
             {
                 Id = cardDeckRequest.Id,
@@ -45,6 +62,11 @@ namespace BL.Services
 
         public GetCardDeckResponse GetCardDeck(int cardDeckId)
         {
+            if (!ValidationHelper.IsValidCardDeckId(cardDeckId, _cardDeckRepository))
+            {
+                throw new BadRequestException("Неверный ID колоды. Пожалуйста, проверьте правильность введенных данных и повторите попытку.");
+            }
+
             var cardDeck = _cardDeckRepository.GetCardDeck(cardDeckId);
             return new GetCardDeckResponse
             {
@@ -84,11 +106,21 @@ namespace BL.Services
 
         public void DeleteCardDeck(int cardDeckId)
         {
+            if (!ValidationHelper.IsValidCardDeckId(cardDeckId, _cardDeckRepository))
+            {
+                throw new BadRequestException("Неверный ID колоды. Пожалуйста, проверьте правильность введенных данных и повторите попытку.");
+            }
+
             _cardDeckRepository.DeleteCardDeck(cardDeckId);
         }
 
         public void ShuffleCardDeck(int cardDeckId)
         {
+            if (!ValidationHelper.IsValidCardDeckId(cardDeckId, _cardDeckRepository))
+            {
+                throw new BadRequestException("Неверный ID колоды. Пожалуйста, проверьте правильность введенных данных и повторите попытку.");
+            }
+
             _cardDeckRepository.ShuffleCardDeck(cardDeckId);
         }
     }

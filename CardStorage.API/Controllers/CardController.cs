@@ -16,6 +16,9 @@ namespace CardStorage.API.Controllers
             _cardService = cardService;
         }
 
+        /// <summary>
+        /// Получает информацию о карте.
+        /// </summary>
         [HttpGet("getCard/{cardId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -25,6 +28,9 @@ namespace CardStorage.API.Controllers
             return Ok(card);
         }
 
+        /// <summary>
+        /// Получает список всех карт в указанной колоде/
+        /// </summary>
         [HttpGet("getAllCardsInCardDeck/{cardDeckId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -34,6 +40,9 @@ namespace CardStorage.API.Controllers
             return Ok(cards);
         }
 
+        /// <summary>
+        /// Добавляет новые карты в указанную колоду.
+        /// </summary>
         [HttpPost("addCardsToCardDeck")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -47,6 +56,9 @@ namespace CardStorage.API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Обновить карту.
+        /// </summary>
         [HttpPut("updateCard")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -57,6 +69,9 @@ namespace CardStorage.API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Удаляет карту.
+        /// </summary>
         [HttpDelete("deleteCard/{cardId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

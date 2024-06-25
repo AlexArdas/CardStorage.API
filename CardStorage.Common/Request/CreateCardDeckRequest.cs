@@ -9,6 +9,6 @@ namespace CardStorage.Common.Request
     public class CreateCardDeckRequest
     {
         public string Name { get; set; }
-        public List<AddCardRequest> Cards { get; set; }
+        public IEnumerable<AddCardRequest> Cards { get; set; }
     }
 }
