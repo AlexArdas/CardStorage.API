@@ -1,4 +1,6 @@
-﻿using Domain.Entities;
+﻿using CardStorage.Common.Request;
+using CardStorage.Common.Response;
+using Domain.Entities;
 using Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,7 +38,7 @@ namespace CardStorage.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult AddCard([FromBody] IEnumerable<Card> cards)
+        public IActionResult AddCard([FromBody] IEnumerable<AddCardRequest> cards)
         {
             foreach (var card in cards)
             {
@@ -49,7 +51,7 @@ namespace CardStorage.API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult UpdateCard([FromBody] Card card)
+        public IActionResult UpdateCard([FromBody] UpdateCardRequest card)
         {
             _cardService.UpdateCard(card);
             return Ok();

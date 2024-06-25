@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BL\BL.csproj" />
+    <ProjectReference Include="..\CardStorage.BL\CardStorage.BL.csproj" />
   </ItemGroup>
 
 </Project>

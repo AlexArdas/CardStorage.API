@@ -9,19 +9,19 @@ namespace Common.Helpers
 {
     public static class ValidationHelper
     {
-        public static void ValidateCard()
+        public static void ValidateCard(string suit, int value, int cardDeckId)
         {
-            if (!ValidationHelper.IsValidCardDeckId())
+            if (!IsValidCardDeckId(value))
             {
                 throw new ArgumentException("Неверный ID колоды. Пожалуйста проверьте правильность введеных данных и повторите попытку");
             }
 
-            if (!ValidationHelper.IsValidSuit())
+            if (!IsValidSuit(suit))
             {
                 throw new ArgumentException("Неверная масть. Пожалуйста проверьте правильность введеных данных и повторите попытку");
             }
 
-            if (!ValidationHelper.IsValidCardValue())
+            if (!IsValidCardValue(cardDeckId))
             {
                 throw new ArgumentException("Неверное значение карты. Пожалуйста проверьте правильность введеных данных и повторите попытку");
             }
@@ -33,7 +33,7 @@ namespace Common.Helpers
 
         public static bool IsValidCardValue(int value)
         {
-            return value >= 1 && value <= 13;
+            return value >= 2 && value <= 13;
         }
         public static bool IsValidCardDeckId(int cardDeckId)
         {

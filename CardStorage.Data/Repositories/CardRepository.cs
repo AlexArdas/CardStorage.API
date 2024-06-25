@@ -30,7 +30,6 @@ namespace Data.Repositories
             {
                 existingCard.Value = card.Value;
                 existingCard.Suit = card.Suit;
-                existingCard.Order = card.Order;
             }
         }
         public void DeleteCard(CardDeck cardDeck, int cardId)

@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardStorage.API", "CardStorage\CardStorage.API.csproj", "{8C1B8796-40A0-463F-B1E3-1AC6DCDAA468}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardStorage.API", "CardStorage.API\CardStorage.API.csproj", "{8C1B8796-40A0-463F-B1E3-1AC6DCDAA468}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{E74C91CB-719D-46C9-8F13-8C732010F811}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardStorage.BL", "CardStorage.BL\CardStorage.BL.csproj", "{E74C91CB-719D-46C9-8F13-8C732010F811}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{8C2E394E-DA8F-4FD8-8824-3A7778A75AD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardStorage.Domain", "CardStorage.Domain\CardStorage.Domain.csproj", "{8C2E394E-DA8F-4FD8-8824-3A7778A75AD9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{A806C77E-6B23-476D-AC5E-EA0391AD41AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardStorage.Data", "CardStorage.Data\CardStorage.Data.csproj", "{A806C77E-6B23-476D-AC5E-EA0391AD41AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{D753CEC1-ACD3-46A7-BE4C-7F5285A69028}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardStorage.Common", "CardStorage.Common\CardStorage.Common.csproj", "{D753CEC1-ACD3-46A7-BE4C-7F5285A69028}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

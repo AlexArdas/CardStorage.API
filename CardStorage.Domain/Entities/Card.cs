@@ -1,4 +1,5 @@
-﻿using Domain.Enum;
+﻿using CardStorage.Domain.Enum;
+using Domain.Enum;
 
 namespace Domain.Entities
 {

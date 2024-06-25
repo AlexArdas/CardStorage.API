@@ -29,7 +29,6 @@ namespace Data.Repositories
             if (existingCardDeck != null)
             {
                 existingCardDeck.Name = cardDeck.Name;
-                existingCardDeck.Cards = cardDeck.Cards;
             }
         }
 
@@ -49,10 +48,6 @@ namespace Data.Repositories
             {
                 var random = new Random();
                 cardDeck.Cards = cardDeck.Cards.OrderBy(x => random.Next()).ToList();
-                for (int i = 0; i < cardDeck.Cards.Count; i++)
-                {
-                    cardDeck.Cards[i].Order = i + 1;
-                }
                 UpdateCardDeck(cardDeck);
             }
         }
